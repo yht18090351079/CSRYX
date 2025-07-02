@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发现成都 - 蓉易行</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/discover.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- 头部导航 -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">发现成都</h1>
+                <div class="header-actions">
+                    <button class="header-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="header-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 搜索区域 -->
+        <div class="search-section">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="搜索景点、美食、活动..." class="search-input" id="searchInput">
+                <div class="search-actions">
+                    <button class="search-action-btn" id="voiceBtn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="search-action-btn" id="cameraBtn">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <button class="search-action-btn" id="locationBtn">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分类导航 -->
+        <div class="category-section">
+            <div class="category-grid">
+                <div class="category-item" data-category="attractions">
+                    <div class="category-icon">🏛️</div>
+                    <span class="category-name">景点</span>
+                </div>
+                <div class="category-item" data-category="food">
+                    <div class="category-icon">🍜</div>
+                    <span class="category-name">美食</span>
+                </div>
+                <div class="category-item" data-category="hotels">
+                    <div class="category-icon">🏨</div>
+                    <span class="category-name">酒店</span>
+                </div>
+                <div class="category-item" data-category="activities">
+                    <div class="category-icon">🎭</div>
+                    <span class="category-name">活动</span>
+                </div>
+                <div class="category-item" data-category="seasonal">
+                    <div class="category-icon">🌸</div>
+                    <span class="category-name">季节</span>
+                </div>
+                <div class="category-item" data-category="transport">
+                    <div class="category-icon">🚇</div>
+                    <span class="category-name">交通</span>
+                </div>
+                <div class="category-item" data-category="teahouse">
+                    <div class="category-icon">☕</div>
+                    <span class="category-name">茶馆</span>
+                </div>
+                <div class="category-item" data-category="shopping">
+                    <div class="category-icon">🛍️</div>
+                    <span class="category-name">购物</span>
+                </div>
+                <div class="category-item" data-category="photo">
+                    <div class="category-icon">📸</div>
+                    <span class="category-name">打卡</span>
+                </div>
+                <div class="category-item" data-category="shows">
+                    <div class="category-icon">🎪</div>
+                    <span class="category-name">演出</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="content-section">
+            <!-- 今日热门 -->
+            <div class="content-module">
+                <div class="module-header">
+                    <h2 class="module-title">
+                        <i class="fas fa-fire"></i>
+                        今日热门
+                    </h2>
+                    <button class="more-btn">更多</button>
+                </div>
+                <div class="hot-list" id="hotList">
+                    <!-- 热门内容将由JS动态生成 -->
+                </div>
+            </div>
+
+            <!-- 为您推荐 -->
+            <div class="content-module">
+                <div class="module-header">
+                    <h2 class="module-title">
+                        <i class="fas fa-bullseye"></i>
+                        为您推荐
+                    </h2>
+                    <button class="more-btn">更多</button>
+                </div>
+                <div class="recommendation-grid" id="recommendationGrid">
+                    <!-- 推荐内容将由JS动态生成 -->
+                </div>
+            </div>
+
+            <!-- 附近美食 -->
+            <div class="content-module">
+                <div class="module-header">
+                    <h2 class="module-title">
+                        <i class="fas fa-utensils"></i>
+                        附近美食
+                    </h2>
+                    <button class="more-btn">更多</button>
+                </div>
+                <div class="food-grid" id="foodGrid">
+                    <!-- 美食内容将由JS动态生成 -->
+                </div>
+            </div>
+
+            <!-- 本周活动 -->
+            <div class="content-module">
+                <div class="module-header">
+                    <h2 class="module-title">
+                        <i class="fas fa-calendar-week"></i>
+                        本周活动
+                    </h2>
+                    <button class="more-btn">更多</button>
+                </div>
+                <div class="activity-list" id="activityList">
+                    <!-- 活动内容将由JS动态生成 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </a>
+            <a href="discover.html" class="nav-item active">
+                <i class="fas fa-compass"></i>
+                <span>发现</span>
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fas fa-robot"></i>
+                <span>规划</span>
+            </a>
+            <a href="trips.html" class="nav-item">
+                <i class="fas fa-map"></i>
+                <span>行程</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- 搜索建议弹层 -->
+    <div class="search-suggestions" id="searchSuggestions">
+        <div class="suggestions-content">
+            <div class="suggestions-section">
+                <h3>热门搜索</h3>
+                <div class="suggestion-tags">
+                    <span class="suggestion-tag">宽窄巷子</span>
+                    <span class="suggestion-tag">锦里古街</span>
+                    <span class="suggestion-tag">杜甫草堂</span>
+                    <span class="suggestion-tag">武侯祠</span>
+                    <span class="suggestion-tag">火锅</span>
+                    <span class="suggestion-tag">川剧变脸</span>
+                </div>
+            </div>
+            <div class="suggestions-section">
+                <h3>搜索历史</h3>
+                <div class="history-list" id="searchHistory">
+                    <!-- 搜索历史将由JS动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>正在加载精彩内容...</p>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/discover.js"></script>
+</body>
+</html> 

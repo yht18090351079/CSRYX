@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 蓉易行</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- 头部状态栏 -->
+        <header class="header">
+            <div class="header-content">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h1 class="header-title">个人中心</h1>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 用户信息区域 -->
+        <div class="user-section">
+            <div class="user-info">
+                <div class="avatar-container">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" 
+                         alt="用户头像" class="user-avatar" id="userAvatar">
+                    <div class="level-badge">Lv.3</div>
+                </div>
+                <div class="user-details">
+                    <h2 class="user-name" id="userName">王小明</h2>
+                    <p class="user-description">成都旅游爱好者</p>
+                    <div class="user-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span id="tripCount">3</span>次旅行
+                        </span>
+                        <span class="stat-divider">|</span>
+                        <span class="stat-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="attractionCount">12</span>个景点
+                        </span>
+                    </div>
+                    <div class="user-level">
+                        <i class="fas fa-star"></i>
+                        <span>旅行达人 Lv.3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-actions">
+                <button class="action-btn primary" id="editProfileBtn">
+                    <i class="fas fa-edit"></i>
+                    编辑资料
+                </button>
+                <button class="action-btn secondary" id="achievementsBtn">
+                    <i class="fas fa-trophy"></i>
+                    我的成就
+                </button>
+            </div>
+        </div>
+
+        <!-- 功能菜单区域 -->
+        <div class="menu-section">
+            <!-- 我的收藏 -->
+            <div class="menu-group">
+                <div class="menu-item" onclick="navigateToPage('favorites.html')">
+                    <div class="menu-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">我的收藏</h3>
+                        <p class="menu-subtitle">喜欢的景点 | 实用工具</p>
+                    </div>
+                    <i class="fas fa-chevron-right menu-arrow"></i>
+                </div>
+            </div>
+
+            <!-- 我的预订 -->
+            <div class="menu-group">
+                <div class="menu-item" onclick="navigateToPage('bookings.html')">
+                    <div class="menu-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">我的预订</h3>
+                        <p class="menu-subtitle">门票订单 | 酒店预订</p>
+                    </div>
+                    <i class="fas fa-chevron-right menu-arrow"></i>
+                </div>
+            </div>
+
+            <!-- 社交分享 -->
+            <div class="menu-group">
+                <div class="menu-item" onclick="navigateToPage('social.html')">
+                    <div class="menu-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">社交分享</h3>
+                        <p class="menu-subtitle">我的动态 | 旅行足迹</p>
+                    </div>
+                    <i class="fas fa-chevron-right menu-arrow"></i>
+                </div>
+            </div>
+
+            <!-- 设置与帮助 -->
+            <div class="menu-group">
+                <div class="menu-item" onclick="navigateToPage('settings.html')">
+                    <div class="menu-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">设置与帮助</h3>
+                        <p class="menu-subtitle">应用设置 | 帮助中心</p>
+                    </div>
+                    <i class="fas fa-chevron-right menu-arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据统计区域 -->
+        <div class="stats-section">
+            <div class="stats-card">
+                <h3 class="stats-title">
+                    <i class="fas fa-chart-line"></i>
+                    我的足迹
+                </h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalTrips">3</div>
+                        <div class="stat-label">次旅行</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalAttractions">12</div>
+                        <div class="stat-label">个景点</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalDistance">720</div>
+                        <div class="stat-label">公里里程</div>
+                    </div>
+                </div>
+                
+                <div class="travel-memories">
+                    <div class="memories-header">
+                        <span class="memories-title">
+                            <i class="fas fa-camera"></i>
+                            旅行回忆 (<span id="photoCount">36</span>张照片)
+                        </span>
+                        <button class="view-all-btn" id="viewAllPhotosBtn">查看全部</button>
+                    </div>
+                    <div class="photo-grid" id="photoGrid">
+                        <!-- 照片网格将由JS动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIP会员区域 -->
+        <div class="vip-section">
+            <div class="vip-card">
+                <div class="vip-header">
+                    <h3 class="vip-title">
+                        <i class="fas fa-crown"></i>
+                        升级VIP会员
+                    </h3>
+                    <div class="vip-badge">限时8折</div>
+                </div>
+                <p class="vip-description">
+                    <i class="fas fa-gift"></i>
+                    享受专属权益
+                </p>
+                <div class="vip-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-ad"></i>
+                        <span>无广告体验</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-headset"></i>
+                        <span>专属客服</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-unlock"></i>
+                        <span>高级功能解锁</span>
+                    </div>
+                </div>
+                <button class="vip-upgrade-btn" id="upgradeVipBtn">
+                    <i class="fas fa-crown"></i>
+                    立即升级
+                </button>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </a>
+            <a href="discover.html" class="nav-item">
+                <i class="fas fa-compass"></i>
+                <span>发现</span>
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fas fa-robot"></i>
+                <span>规划</span>
+            </a>
+            <a href="trips.html" class="nav-item">
+                <i class="fas fa-map"></i>
+                <span>行程</span>
+            </a>
+            <a href="profile.html" class="nav-item active">
+                <i class="fas fa-user"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- 编辑资料弹窗 -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>编辑资料</h3>
+                <button class="modal-close" id="closeEditModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>昵称</label>
+                    <input type="text" id="editUserName" placeholder="输入昵称">
+                </div>
+                <div class="form-group">
+                    <label>个人描述</label>
+                    <input type="text" id="editUserDescription" placeholder="输入个人描述">
+                </div>
+                <div class="form-group">
+                    <label>头像</label>
+                    <div class="avatar-upload">
+                        <img id="avatarPreview" src="" alt="头像预览">
+                        <button class="upload-btn" id="uploadAvatarBtn">
+                            <i class="fas fa-camera"></i>
+                            更换头像
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelEditBtn">取消</button>
+                <button class="btn primary" id="saveProfileBtn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>正在加载...</p>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html> 

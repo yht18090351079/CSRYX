@@ -680,3 +680,4 @@ function showMessage(type, text) {
         message.remove();
     }, 3000);
 }
+ 

@@ -17,6 +17,7 @@ html, body {
 /* 主题色彩 */
 :root {
     --primary-color: #667eea;
+    --secondary-color: #764ba2;
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --success-color: #67c23a;
     --warning-color: #faad14;
@@ -27,9 +28,27 @@ html, body {
     --text-disabled: #8c8c8c;
     --border-color: #e4e7ed;
     --bg-color: #f5f7fa;
+    --bg-secondary: #f8f9fb;
     --white: #ffffff;
+    
+    /* 阴影效果 */
     --shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --shadow-focus: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.3);
+    
+    /* 间距系统 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* 边框圆角 */
+    --border-radius: 8px;
+    
+    /* 过渡效果 */
+    --transition: all 0.3s ease;
 }
 
 /* 布局类 */
@@ -44,6 +63,13 @@ html, body {
 
 .page {
     min-height: 100vh;
+    padding-bottom: 70px; /* 为底部导航留出空间 */
+}
+
+.page-container {
+    min-height: 100vh;
+    background: var(--bg-color);
+    position: relative;
     padding-bottom: 70px; /* 为底部导航留出空间 */
 }
 
@@ -301,7 +327,8 @@ html, body {
 }
 
 /* 底部导航样式 */
-.bottom-navigation {
+.bottom-navigation,
+.bottom-nav {
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -313,6 +340,7 @@ html, body {
     border-top: 1px solid var(--border-color);
     display: flex;
     z-index: 1000;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-item {
@@ -322,7 +350,7 @@ html, body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     color: var(--text-disabled);
     gap: 4px;
     text-decoration: none;
@@ -493,6 +521,92 @@ html, body {
 .shadow-hover:hover { box-shadow: var(--shadow-hover); }
 
 .cursor-pointer { cursor: pointer; }
+
+/* 消息提示样式 */
+.message-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    max-width: 300px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.message-toast.show {
+    display: flex;
+    animation: slideInDown 0.3s ease-out;
+}
+
+.message-toast.success {
+    border-left-color: var(--success-color);
+}
+
+.message-toast.warning {
+    border-left-color: var(--warning-color);
+}
+
+.message-toast.error {
+    border-left-color: var(--danger-color);
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* 加载覆盖层样式 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1500;
+}
+
+.loading-overlay.show {
+    display: flex;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid var(--white);
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: var(--white);
+    font-size: 16px;
+    margin: 0;
+}
 
 /* 响应式设计 */
 @media (max-width: 375px) {
