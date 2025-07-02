@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案生成中 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 生成页面样式 -->
+    <link rel="stylesheet" href="styles/generating.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page generating-page">
+            <!-- 生成主界面 -->
+            <div class="generating-content">
+                <!-- AI头像和状态 -->
+                <div class="ai-avatar-section">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                        <div class="thinking-indicator">
+                            <div class="thinking-dot"></div>
+                            <div class="thinking-dot"></div>
+                            <div class="thinking-dot"></div>
+                        </div>
+                    </div>
+                    <h2 class="ai-status" id="aiStatus">AI正在为您定制专属方案...</h2>
+                    <p class="ai-subtitle" id="aiSubtitle">正在分析您的需求偏好</p>
+                </div>
+
+                <!-- 进度指示器 -->
+                <div class="progress-section">
+                    <div class="progress-circle" id="progressCircle">
+                        <div class="progress-inner">
+                            <span class="progress-percentage" id="progressPercentage">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-steps" id="progressSteps">
+                        <div class="step active" data-step="1">
+                            <i class="fas fa-search"></i>
+                            <span>分析需求</span>
+                        </div>
+                        <div class="step" data-step="2">
+                            <i class="fas fa-brain"></i>
+                            <span>智能匹配</span>
+                        </div>
+                        <div class="step" data-step="3">
+                            <i class="fas fa-route"></i>
+                            <span>规划路线</span>
+                        </div>
+                        <div class="step" data-step="4">
+                            <i class="fas fa-magic"></i>
+                            <span>优化方案</span>
+                        </div>
+                        <div class="step" data-step="5">
+                            <i class="fas fa-check-circle"></i>
+                            <span>生成完成</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 生成过程详情 -->
+                <div class="generation-details">
+                    <div class="detail-card" id="detailCard">
+                        <div class="detail-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4 id="detailTitle">正在分析您的旅行偏好...</h4>
+                            <p id="detailDescription">基于您的问答，分析出您喜欢历史文化、成都美食，偏好适中节奏的旅行方式</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 生成提示信息 -->
+                <div class="generation-tips">
+                    <div class="tip-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>我们将为您生成3套不同风格的旅行方案</span>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-clock"></i>
+                        <span>预计生成时间：10-15秒</span>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-star"></i>
+                        <span>每套方案都经过AI智能优化</span>
+                    </div>
+                </div>
+
+                <!-- 取消按钮 -->
+                <div class="action-section">
+                    <button class="btn btn-secondary cancel-btn" id="cancelBtn" onclick="cancelGeneration()">
+                        <i class="fas fa-times"></i>
+                        取消生成
+                    </button>
+                </div>
+            </div>
+
+            <!-- 生成完成界面 -->
+            <div class="generation-complete" id="generationComplete" style="display: none;">
+                <div class="complete-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <h2>🎉 专属方案生成完成！</h2>
+                <p>已为您精心准备3套不同风格的成都旅行方案</p>
+                <div class="plan-preview">
+                    <div class="preview-item">
+                        <i class="fas fa-landmark"></i>
+                        <span>文化深度游</span>
+                    </div>
+                    <div class="preview-item">
+                        <i class="fas fa-utensils"></i>
+                        <span>美食文化混搭</span>
+                    </div>
+                    <div class="preview-item">
+                        <i class="fas fa-coffee"></i>
+                        <span>休闲慢生活</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-large view-plans-btn" onclick="viewPlans()">
+                    <i class="fas fa-eye"></i>
+                    查看方案对比
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 方案生成页面JS -->
+    <script src="js/generating.js"></script>
+</body>
+</html> 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 首页样式 -->
+    <link rel="stylesheet" href="styles/home.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page home-page">
+            <!-- Hero区域 -->
+            <div class="hero-section">
+                <h2>欢迎来到成都</h2>
+                <p>开启您的智能旅程</p>
+                <div class="ai-card card shadow-hover cursor-pointer" onclick="Navigation.goTo('chat')">
+                    <div class="ai-entry">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h3>问问AI小助手</h3>
+                            <p>规划您的专属行程</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快捷功能区 -->
+            <div class="quick-functions page-content">
+                <div class="function-grid">
+                    <div class="function-card card shadow-hover cursor-pointer" onclick="Navigation.goTo('chat')">
+                        <i class="fas fa-route"></i>
+                        <h4>智能规划</h4>
+                        <p>AI定制路线</p>
+                    </div>
+                    <div class="function-card card shadow-hover cursor-pointer" onclick="Navigation.goTo('discover')">
+                        <i class="fas fa-fire"></i>
+                        <h4>热门景点</h4>
+                        <p>精选推荐</p>
+                    </div>
+                    <div class="function-card card shadow-hover cursor-pointer" onclick="Navigation.goTo('discover')">
+                        <i class="fas fa-utensils"></i>
+                        <h4>美食推荐</h4>
+                        <p>地道成都味</p>
+                    </div>
+                    <div class="function-card card shadow-hover cursor-pointer" onclick="Navigation.goTo('trips')">
+                        <i class="fas fa-list-check"></i>
+                        <h4>我的行程</h4>
+                        <p>管理计划</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推荐内容区 -->
+            <div class="recommendations page-content">
+                <h3><i class="fas fa-star text-primary"></i> 今日推荐</h3>
+                <div class="recommendation-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-track" id="carouselTrack">
+                            <!-- 推荐内容将由JS动态生成 -->
+                        </div>
+                    </div>
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <!-- 指示器将由JS动态生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 热门路线 -->
+            <div class="hot-routes page-content">
+                <h3><i class="fas fa-route text-primary"></i> 热门路线</h3>
+                <div class="route-list" id="routeList">
+                    <!-- 路线列表将由JS动态生成 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div id="bottomNavigation"></div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 首页JS -->
+    <script src="js/home.js"></script>
+</body>
+</html> 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案对比 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 对比页面样式 -->
+    <link rel="stylesheet" href="styles/compare.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page compare-page">
+            <!-- 页面头部 -->
+            <div class="page-header">
+                <a href="generating.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="title">方案对比</div>
+                <a href="#" class="action-btn" onclick="regeneratePlans()">重新生成</a>
+            </div>
+
+            <!-- 方案选择指南 -->
+            <div class="selection-guide">
+                <div class="guide-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="guide-text">
+                    <h3>选择最适合您的方案</h3>
+                    <p>我们为您精心准备了3套不同风格的成都旅行方案</p>
+                </div>
+            </div>
+
+            <!-- 方案对比卡片 -->
+            <div class="plans-container" id="plansContainer">
+                <!-- 方案卡片将由JavaScript动态生成 -->
+            </div>
+
+            <!-- 对比维度切换 -->
+            <div class="comparison-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')">
+                        <i class="fas fa-eye"></i>
+                        <span>概览</span>
+                    </button>
+                    <button class="tab-btn" data-tab="schedule" onclick="switchTab('schedule')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>行程</span>
+                    </button>
+                    <button class="tab-btn" data-tab="budget" onclick="switchTab('budget')">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>费用</span>
+                    </button>
+                    <button class="tab-btn" data-tab="features" onclick="switchTab('features')">
+                        <i class="fas fa-star"></i>
+                        <span>特色</span>
+                    </button>
+                </div>
+
+                <!-- 对比内容 -->
+                <div class="tab-content" id="tabContent">
+                    <!-- 内容将由JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <!-- 选择操作区 -->
+            <div class="selection-actions">
+                <div class="selection-info" id="selectionInfo" style="display: none;">
+                    <div class="selected-plan-preview">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="selectedPlanName">已选择：文化深度游</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-secondary compare-all-btn" onclick="showDetailedComparison()">
+                        <i class="fas fa-balance-scale"></i>
+                        详细对比
+                    </button>
+                    <button class="btn btn-primary select-plan-btn" id="selectPlanBtn" 
+                            onclick="confirmSelection()" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                        确认选择
+                    </button>
+                </div>
+            </div>
+
+            <!-- 详细对比弹窗 -->
+            <div class="detailed-comparison-modal" id="detailedModal" style="display: none;">
+                <div class="modal-overlay" onclick="closeDetailedModal()"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>详细方案对比</h3>
+                        <button class="close-btn" onclick="closeDetailedModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="comparison-table" id="comparisonTable">
+                            <!-- 对比表格将由JavaScript生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div id="bottomNavigation"></div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 对比页面JS -->
+    <script src="js/compare.js"></script>
+</body>
+</html> 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI规划助手 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 聊天页面样式 -->
+    <link rel="stylesheet" href="styles/chat.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page chat-page">
+            <!-- 页面头部 -->
+            <div class="page-header">
+                <a href="home.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="title">AI规划助手</div>
+                <a href="#" class="action-btn" onclick="resetChat()">重新开始</a>
+            </div>
+
+            <!-- 聊天内容区 -->
+            <div class="chat-content">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- 初始消息 -->
+                    <div class="message ai-message">
+                        <div class="avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <p>你好！我是蓉易行AI助手小蓉，很高兴为您规划成都之旅！🎉</p>
+                                <p>让我来了解一下您的需求，为您定制最适合的旅游方案。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 思考动画 -->
+                <div class="thinking-animation" id="thinkingAnimation" style="display: none;">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="thinking-bubbles">
+                        <div class="thinking-bubble">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="chat-input-area">
+                <!-- 快捷回复选项 -->
+                <div class="quick-replies" id="quickReplies">
+                    <!-- 快捷回复将由JS动态生成 -->
+                </div>
+                
+                <!-- 输入框 -->
+                <div class="input-container">
+                    <div class="input-group">
+                        <input type="text" class="input chat-input" id="chatInput" 
+                               placeholder="请输入您的回答..." maxlength="200">
+                        <button class="btn btn-primary btn-send" id="sendBtn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div id="bottomNavigation"></div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 聊天页面JS -->
+    <script src="js/chat.js"></script>
+</body>
+</html> 

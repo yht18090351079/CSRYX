@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图导航 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 地图页面样式 -->
+    <link rel="stylesheet" href="styles/map.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page map-page">
+            <!-- 页面头部 -->
+            <div class="page-header">
+                <a href="todo.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="title">地图导航</div>
+                <a href="#" class="action-btn" onclick="toggleMapType()">
+                    <i class="fas fa-layer-group" id="mapTypeIcon"></i>
+                </a>
+            </div>
+
+            <!-- 地图容器 -->
+            <div class="map-container">
+                <!-- 模拟地图区域 -->
+                <div class="map-canvas" id="mapCanvas">
+                    <!-- 地图背景 -->
+                    <div class="map-background"></div>
+                    
+                    <!-- 地图标记点 -->
+                    <div class="map-markers" id="mapMarkers">
+                        <!-- 标记点将由JavaScript动态生成 -->
+                    </div>
+                    
+                    <!-- 路线轨迹 -->
+                    <div class="route-path" id="routePath">
+                        <!-- 路线将由JavaScript动态生成 -->
+                    </div>
+                    
+                    <!-- 当前位置 -->
+                    <div class="current-location" id="currentLocation">
+                        <div class="location-pulse"></div>
+                        <div class="location-dot"></div>
+                    </div>
+                </div>
+
+                <!-- 地图控制器 -->
+                <div class="map-controls">
+                    <button class="control-btn" onclick="zoomIn()" title="放大">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="control-btn" onclick="zoomOut()" title="缩小">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="control-btn" onclick="resetView()" title="重置视图">
+                        <i class="fas fa-crosshairs"></i>
+                    </button>
+                    <button class="control-btn" onclick="toggleCurrentLocation()" title="我的位置">
+                        <i class="fas fa-location-arrow"></i>
+                    </button>
+                </div>
+
+                <!-- 地图模式切换 -->
+                <div class="map-mode-switch">
+                    <button class="mode-btn active" data-mode="satellite" onclick="switchMapMode('satellite')">
+                        <i class="fas fa-satellite"></i>
+                        <span>卫星</span>
+                    </button>
+                    <button class="mode-btn" data-mode="street" onclick="switchMapMode('street')">
+                        <i class="fas fa-road"></i>
+                        <span>街道</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 导航信息卡片 -->
+            <div class="navigation-card" id="navigationCard">
+                <div class="nav-header">
+                    <div class="nav-status">
+                        <div class="status-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="status-info">
+                            <h3 id="navTitle">前往杜甫草堂</h3>
+                            <p id="navSubtitle">距离约1.2公里 · 预计8分钟</p>
+                        </div>
+                    </div>
+                    <button class="nav-close" onclick="closeNavigation()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="nav-instructions" id="navInstructions">
+                    <div class="instruction-item active">
+                        <div class="instruction-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="instruction-text">
+                            <span class="distance">200米后</span>
+                            <span class="action">直行进入青羊大道</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="nav-btn nav-btn-secondary" onclick="pauseNavigation()">
+                        <i class="fas fa-pause"></i>
+                        暂停导航
+                    </button>
+                    <button class="nav-btn nav-btn-primary" onclick="startVoiceNavigation()">
+                        <i class="fas fa-volume-up"></i>
+                        语音导航
+                    </button>
+                </div>
+            </div>
+
+            <!-- 地点搜索栏 -->
+            <div class="search-bar" id="searchBar">
+                <div class="search-input-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="搜索地点、景点或餐厅..." 
+                           onkeyup="handleSearch(event)" onfocus="showSearchSuggestions()">
+                    <button class="search-clear" onclick="clearSearch()" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- 搜索建议 -->
+                <div class="search-suggestions" id="searchSuggestions" style="display: none;">
+                    <div class="suggestions-header">
+                        <h4>热门景点</h4>
+                    </div>
+                    <div class="suggestions-list" id="suggestionsList">
+                        <!-- 建议列表将由JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快速入口 -->
+            <div class="quick-access" id="quickAccess">
+                <div class="quick-items">
+                    <div class="quick-item" onclick="searchNearby('restaurant')">
+                        <i class="fas fa-utensils"></i>
+                        <span>附近餐厅</span>
+                    </div>
+                    <div class="quick-item" onclick="searchNearby('attraction')">
+                        <i class="fas fa-camera"></i>
+                        <span>热门景点</span>
+                    </div>
+                    <div class="quick-item" onclick="searchNearby('hotel')">
+                        <i class="fas fa-bed"></i>
+                        <span>住宿酒店</span>
+                    </div>
+                    <div class="quick-item" onclick="searchNearby('transport')">
+                        <i class="fas fa-bus"></i>
+                        <span>公共交通</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 地点详情弹窗 -->
+            <div class="place-modal" id="placeModal" style="display: none;">
+                <div class="modal-overlay" onclick="closePlaceModal()"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="place-image" id="placeImage">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <button class="close-btn" onclick="closePlaceModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3 id="placeName">杜甫草堂</h3>
+                        <div class="place-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text" id="placeRating">4.7分</span>
+                            <span class="review-count" id="reviewCount">2.3k条评论</span>
+                        </div>
+                        <div class="place-info">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="placeAddress">青羊区青华路37号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <span id="placePhone">028-87319258</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span id="placeHours">08:00-18:00</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span id="placePrice">¥60</span>
+                            </div>
+                        </div>
+                        <div class="place-description" id="placeDescription">
+                            唐代大诗人杜甫流寓成都时的故居，现为中国古典园林和文学遗址。
+                        </div>
+                        <div class="place-tags" id="placeTags">
+                            <span class="tag">历史文化</span>
+                            <span class="tag">园林建筑</span>
+                            <span class="tag">诗词文化</span>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="addToFavorites()">
+                            <i class="fas fa-heart"></i>
+                            收藏
+                        </button>
+                        <button class="btn btn-primary" onclick="startNavigation()">
+                            <i class="fas fa-navigation"></i>
+                            开始导航
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 导航模式提示 -->
+            <div class="navigation-status" id="navigationStatus" style="display: none;">
+                <div class="status-content">
+                    <i class="fas fa-navigation"></i>
+                    <span>导航进行中...</span>
+                    <button onclick="stopNavigation()">结束</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div id="bottomNavigation"></div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 地图页面JS -->
+    <script src="js/map.js"></script>
+</body>
+</html> 

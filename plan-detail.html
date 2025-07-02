@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案详情 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 方案详情页面样式 -->
+    <link rel="stylesheet" href="styles/plan-detail.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page plan-detail-page">
+            <!-- 页面头部 -->
+            <div class="page-header">
+                <a href="compare.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="title" id="planTitle">文化深度游</div>
+                <a href="#" class="action-btn" onclick="sharePlan()">
+                    <i class="fas fa-share-alt"></i>
+                </a>
+            </div>
+
+            <!-- 方案概览卡片 -->
+            <div class="plan-overview-card">
+                <div class="plan-header">
+                    <div class="plan-icon">
+                        <i class="fas fa-landmark" id="planIcon"></i>
+                    </div>
+                    <div class="plan-info">
+                        <h2 class="plan-name" id="planName">文化深度游</h2>
+                        <p class="plan-subtitle" id="planSubtitle">深度体验成都的历史文化底蕴</p>
+                        <div class="plan-tags" id="planTags">
+                            <span class="tag tag-primary">历史文化</span>
+                            <span class="tag tag-secondary">适中强度</span>
+                            <span class="tag tag-accent">3天行程</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="plan-summary">
+                    <div class="summary-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="label">行程天数</span>
+                        <span class="value" id="planDays">3天2晚</span>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span class="label">预算费用</span>
+                        <span class="value" id="planBudget">¥1,580</span>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="label">景点数量</span>
+                        <span class="value" id="planSpots">8个景点</span>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-utensils"></i>
+                        <span class="label">美食体验</span>
+                        <span class="value" id="planFood">5处美食</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容标签页 -->
+            <div class="content-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="itinerary" onclick="switchTab('itinerary')">
+                        <i class="fas fa-route"></i>
+                        <span>详细行程</span>
+                    </button>
+                    <button class="tab-btn" data-tab="attractions" onclick="switchTab('attractions')">
+                        <i class="fas fa-camera"></i>
+                        <span>景点介绍</span>
+                    </button>
+                    <button class="tab-btn" data-tab="budget" onclick="switchTab('budget')">
+                        <i class="fas fa-calculator"></i>
+                        <span>费用明细</span>
+                    </button>
+                    <button class="tab-btn" data-tab="tips" onclick="switchTab('tips')">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>贴心提醒</span>
+                    </button>
+                </div>
+
+                <!-- 标签页内容 -->
+                <div class="tab-content" id="tabContent">
+                    <!-- 内容将由JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <!-- 操作按钮区 -->
+            <div class="action-buttons">
+                <button class="btn btn-secondary add-to-calendar-btn" onclick="addToCalendar()">
+                    <i class="fas fa-calendar-plus"></i>
+                    添加到日历
+                </button>
+                <button class="btn btn-primary start-journey-btn" onclick="startJourney()">
+                    <i class="fas fa-play"></i>
+                    开始旅程
+                </button>
+            </div>
+
+            <!-- 收藏成功提示 -->
+            <div class="success-popup" id="successPopup" style="display: none;">
+                <div class="popup-content">
+                    <div class="popup-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3>操作成功</h3>
+                    <p id="successMessage">已添加到您的旅行计划</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div id="bottomNavigation"></div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 方案详情页面JS -->
+    <script src="js/plan-detail.js"></script>
+</body>
+</html> 

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的行程 - 蓉易行</title>
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="styles/common.css">
+    <!-- 行程页面样式 -->
+    <link rel="stylesheet" href="styles/trips.css">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page trips-page">
+            <!-- 页面头部 -->
+            <div class="page-header">
+                <a href="map.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="title">我的行程</div>
+                <a href="#" class="action-btn" onclick="showCreateTripModal()">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <!-- 行程统计卡片 -->
+            <div class="trip-stats-card">
+                <div class="stats-header">
+                    <h3>旅行足迹</h3>
+                    <p>记录您的美好旅程</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalTrips">5</span>
+                            <span class="stat-label">总行程</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="visitedCities">3</span>
+                            <span class="stat-label">访问城市</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalPhotos">128</span>
+                            <span class="stat-label">旅行照片</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalDays">15</span>
+                            <span class="stat-label">旅行天数</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 行程筛选 -->
+            <div class="trip-filters">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-status="all" onclick="filterTrips('all')">
+                        <span>全部</span>
+                        <span class="count" id="allCount">5</span>
+                    </button>
+                    <button class="filter-btn" data-status="planning" onclick="filterTrips('planning')">
+                        <span>计划中</span>
+                        <span class="count" id="planningCount">2</span>
+                    </button>
+                    <button class="filter-btn" data-status="ongoing" onclick="filterTrips('ongoing')">
+                        <span>进行中</span>
+                        <span class="count" id="ongoingCount">1</span>
+                    </button>
+                    <button class="filter-btn" data-status="completed" onclick="filterTrips('completed')">
+                        <span>已完成</span>
+                        <span class="count" id="completedCount">2</span>
+                    </button>
+                </div>
+                <div class="sort-options">
+                    <select id="sortSelect" onchange="handleSortChange(this.value)">
+                        <option value="date_desc">按时间倒序</option>
+                        <option value="date_asc">按时间正序</option>
+                        <option value="name_asc">按名称排序</option>
+                        <option value="duration_desc">按时长排序</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 行程列表 -->
+            <div class="trips-container">
+                <div class="trips-list" id="tripsList">
+                    <!-- 行程列表将由JavaScript动态生成 -->
+                </div>
+                
+                <!-- 空状态 -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                    <h3>还没有行程呢</h3>
+                    <p>快来创建您的第一个旅行计划吧！</p>
+                    <button class="btn btn-primary" onclick="showCreateTripModal()">
+                        <i class="fas fa-plus"></i>
+                        创建行程
+                    </button>
+                </div>
+            </div>
+
+            <!-- 创建行程弹窗 -->
+            <div class="trip-modal" id="tripModal" style="display: none;">
+                <div class="modal-overlay" onclick="hideCreateTripModal()"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>创建新行程</h3>
+                        <button class="close-btn" onclick="hideCreateTripModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="tripForm" onsubmit="createTrip(event)">
+                            <div class="form-group">
+                                <label for="tripName">行程名称</label>
+                                <input type="text" id="tripName" placeholder="给您的行程起个名字" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tripDestination">目的地</label>
+                                <input type="text" id="tripDestination" placeholder="选择目的地城市" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tripStartDate">开始日期</label>
+                                    <input type="date" id="tripStartDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tripEndDate">结束日期</label>
+                                    <input type="date" id="tripEndDate" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tripBudget">预算</label>
+                                <input type="number" id="tripBudget" placeholder="预计花费" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="tripDescription">行程描述</label>
+                                <textarea id="tripDescription" placeholder="描述一下这次旅行的目的和期待" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="tripTags">行程标签</label>
+                                <div class="tag-selector">
+                                    <button type="button" class="tag-option" data-tag="文化">文化</button>
+                                    <button type="button" class="tag-option" data-tag="美食">美食</button>
+                                    <button type="button" class="tag-option" data-tag="自然">自然</button>
+                                    <button type="button" class="tag-option" data-tag="历史">历史</button>
+                                    <button type="button" class="tag-option" data-tag="休闲">休闲</button>
+                                    <button type="button" class="tag-option" data-tag="购物">购物</button>
+                                </div>
+                                <input type="hidden" id="selectedTags">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="hideCreateTripModal()">取消</button>
+                                <button type="submit" class="btn btn-primary">创建行程</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 行程详情弹窗 -->
+            <div class="trip-detail-modal" id="tripDetailModal" style="display: none;">
+                <div class="modal-overlay" onclick="hideTripDetailModal()"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="trip-status-badge" id="tripStatusBadge">进行中</div>
+                        <button class="close-btn" onclick="hideTripDetailModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="trip-detail-header">
+                            <h2 id="detailTripName">成都文化之旅</h2>
+                            <p id="detailTripDestination">成都市</p>
+                            <div class="trip-detail-meta">
+                                <span id="detailTripDates">2024.07.15 - 2024.07.17</span>
+                                <span id="detailTripDuration">3天2晚</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trip-detail-stats">
+                            <div class="detail-stat">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>预算: ¥<span id="detailTripBudget">1500</span></span>
+                            </div>
+                            <div class="detail-stat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>景点: <span id="detailTripSpots">8</span>个</span>
+                            </div>
+                            <div class="detail-stat">
+                                <i class="fas fa-tasks"></i>
+                                <span>任务: <span id="detailTripTasks">12</span>项</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trip-detail-description">
+                            <h4>行程描述</h4>
+                            <p id="detailTripDesc">探索成都深厚的历史文化底蕴，品味地道川菜，感受慢生活节奏。</p>
+                        </div>
+                        
+                        <div class="trip-detail-tags">
+                            <h4>行程标签</h4>
+                            <div id="detailTripTags">
+                                <span class="tag">文化</span>
+                                <span class="tag">美食</span>
+                                <span class="tag">历史</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trip-progress">
+                            <h4>完成进度</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="detailProgressFill" style="width: 60%"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="detailProgressText">60% 完成</span>
+                                <span id="detailProgressDays">剩余1天</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="shareTrip()">
+                            <i class="fas fa-share-alt"></i>
+                            分享
+                        </button>
+                        <button class="btn btn-accent" onclick="editTrip()">
+                            <i class="fas fa-edit"></i>
+                            编辑
+                        </button>
+                        <button class="btn btn-primary" onclick="viewTripDetails()">
+                            <i class="fas fa-eye"></i>
+                            查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 浮动添加按钮 -->
+            <div class="floating-add-btn" onclick="showCreateTripModal()">
+                <i class="fas fa-plus"></i>
+            </div>
+
+            <!-- 成功提示 -->
+            <div class="success-toast" id="successToast" style="display: none;">
+                <div class="toast-content">
+                    <div class="toast-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span id="toastMessage">操作成功</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div id="bottomNavigation"></div>
+    </div>
+
+    <!-- 公共JS -->
+    <script src="js/common.js"></script>
+    <!-- 行程页面JS -->
+    <script src="js/trips.js"></script>
+</body>
+</html> 
